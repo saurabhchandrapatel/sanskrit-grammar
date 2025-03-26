@@ -1,4 +1,3 @@
-### Sanskrit Grammar Python Module: `sanskrit_grammar.py`
 
 This Python module provides functions to handle and manipulate various aspects of Sanskrit grammar, including **word generation**, **prefixes (Upasarga)**, **suffixes (Pratyaya)**, **verb conjugation**, **noun declension**, **Sandhi** (joining words), **Sandhi Vechheda** (splitting words), and **tense identification**. The module is designed to be a foundational tool for working with Sanskrit words and sentences in Python, supporting multiple grammatical operations, and it can be extended further as per specific needs.
 

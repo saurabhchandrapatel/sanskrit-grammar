@@ -210,7 +210,7 @@ class SandhiTransformer:
             Optional[str]: Transformed vowel combination or None
         """
         vowel_key = f"{first_vowel} + {second_vowel}"
-        return cls.SANDHI_RULES["vowel_sandhi"].get(vowel_key)
+        return cls.SANDHI_RULES["vowel_sandhi"].get(vowel_key, second_vowel)
 
     @classmethod
     def apply_consonant_sandhi(cls, prefix: str, word: str) -> str:
@@ -233,7 +233,7 @@ class SandhiTransformer:
                         "ka_varga": "सङ्",
                         "ca_varga": "सञ्",
                         "ta_varga": "सण्",
-                        "pa_varga": "सम्"
+                        "pa_varga": "संप्"
                     }
                     prefix = nasalization_map.get(varga, "सम्")
                     break
@@ -264,14 +264,17 @@ class SandhiTransformer:
         }
         
         # Comprehensive vowel identification
-        for vowel_type, vowel_list in cls.VOWELS.items():
-            for vowel in vowel_list:
-                if vowel in word:
-                    analysis["vowels"].append(vowel)
+        VOWELS = ["अ", "आ", "इ", "ई", "उ", "ऊ", "ए", "ऐ", "ओ", "औ"]
         
-        # If no vowels found, add default vowel
+        # Find the first long or short vowel in the word
+        for char in word:
+            if char in VOWELS:
+                analysis["vowels"] = [char]
+                break
+        
+        # If no vowel found, default to अ
         if not analysis["vowels"]:
-            analysis["vowels"] = ["अ", "इ"]
+            analysis["vowels"] = ["अ"]
         
         # Comprehensive consonant identification
         all_consonants = []
@@ -283,7 +286,8 @@ class SandhiTransformer:
         
         for char in word:
             if char in all_consonants:
-                analysis["consonants"].append(char)
+                if char not in analysis["consonants"]:
+                    analysis["consonants"].append(char)
         
         return analysis
 

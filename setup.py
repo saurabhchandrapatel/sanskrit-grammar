@@ -8,7 +8,7 @@ requirements = [
 ]
 setup(
     name='sanskrit-grammar',
-    version='0.3.0',
+    version='0.4.0',
     packages=find_packages(),
     install_requires=requirements,  # <- use the requirements here
     author='Saurabh Chandra Patel',

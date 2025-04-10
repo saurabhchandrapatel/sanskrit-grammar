@@ -6,7 +6,8 @@ def apply_guna(vowel: str) -> str:
         'इ': 'ए', 'ई': 'ए',
         'उ': 'ओ', 'ऊ': 'ओ',
         'ऋ': 'अर्', 'ॠ': 'अर्',
-        'ृ': 'र', 'ॄ': 'र'
+        'ृ': 'र', 'ॄ': 'र',
+        'ू': 'ो'  # For भू -> भो
     }
     return guna_map.get(vowel, vowel)
 
@@ -30,12 +31,61 @@ def apply_stem_sandhi(stem: str, suffix: str) -> str:
         
     # Special handling for verb endings starting with vowels
     if suffix and suffix[0] in 'अआइईउऊऋॠएऐओऔ':
-        if stem.endswith('व्'):
-            return stem[:-2] + 'व' + suffix
+        # Handle roots ending in ू (भू)
+        if stem.endswith('ू'):
+            stem = stem[:-1] + 'व'
+        # Handle other semi-vowel transitions
+        elif stem.endswith('व्'):
+            stem = stem[:-2] + 'व'
         elif stem.endswith('य्'):
-            return stem[:-2] + 'य' + suffix
+            stem = stem[:-2] + 'य'
+            
+    # Handle special sandhi cases
+    if suffix.startswith('अ'):
+        if stem.endswith('ो'):  # भो + अति -> भवति
+            stem = stem[:-1] + 'व'
+        elif stem.endswith('े'):  # ने + अति -> नयति
+            stem = stem[:-1] + 'य'
+            
+    # Handle vowel sandhi for imperative mood
+    if suffix.startswith('आ'):
+        if stem.endswith('य'):
+            return stem + suffix[1:]  # नय + आनि -> नयानि
             
     return sandhi_handler(stem, suffix)
+
+def modify_verb_stem(dhatu: str, lakara: str) -> str:
+    """
+    Apply verb stem modifications based on tense/mood.
+    """
+    # Basic verb stem modifications
+    if lakara == 'lat':  # Present tense
+        # Special handling for भू
+        if dhatu == 'भू':
+            return 'भव'  # Direct transformation for present tense
+            
+        # For roots ending in vowels, apply guna
+        if dhatu[-1] in 'िीुूृॄ':
+            if dhatu[-1] in 'िी':
+                return dhatu[:-1] + 'य्'  # Add 'य्' after guna for i/ī
+            elif dhatu[-1] in 'ुू':
+                return dhatu[:-1] + 'व्'  # Add 'व्' after guna for u/ū
+            else:
+                return dhatu[:-1] + apply_guna(dhatu[-1])
+    
+    elif lakara == 'lot':  # Imperative
+        # Special handling for imperative mood
+        if dhatu == 'भू':
+            return 'भव'
+        elif dhatu == 'नी':
+            return 'नय'  # Direct transformation for imperative
+        elif dhatu[-1] in 'िीुूृॄ':
+            if dhatu[-1] in 'िी':
+                return dhatu[:-1] + 'य'
+            elif dhatu[-1] in 'ुू':
+                return dhatu[:-1] + 'व'
+                
+    return dhatu
 
 def generate_noun_forms(noun: str, gender: str):
     """
@@ -113,22 +163,6 @@ def generate_noun_forms(noun: str, gender: str):
     
     return declensions
 
-def modify_verb_stem(dhatu: str, lakara: str) -> str:
-    """
-    Apply verb stem modifications based on tense/mood.
-    """
-    # Basic verb stem modifications
-    if lakara == 'lat':  # Present tense
-        # For roots ending in vowels, apply guna
-        if dhatu[-1] in 'िीुऊृॄ':
-            if dhatu[-1] in 'िी':
-                return dhatu[:-1] + 'य्'  # Add 'य्' after guna for i/ī
-            elif dhatu[-1] in 'ुऊ':
-                return dhatu[:-1] + 'व्'  # Add 'व्' after guna for u/ū
-            else:
-                return dhatu[:-1] + apply_guna(dhatu[-1])
-    return dhatu
-
 def generate_verb_forms(dhatu: str, pada: str, lakara: str):
     """
     Generate all conjugated forms of a verb root (धातु) for given लकार.
@@ -192,6 +226,17 @@ def generate_verb_forms(dhatu: str, pada: str, lakara: str):
                 # Apply verb stem modifications based on tense and other rules
                 stem = modify_verb_stem(dhatu, lakara)
                 # Apply sandhi rules between stem and ending
-                conjugations[persons[person]][number] = apply_stem_sandhi(stem, ending)
+                form = apply_stem_sandhi(stem, ending)
+                
+                # Special handling for imperative forms
+                if lakara == 'lot' and person == 3:  # First person imperative
+                    if form.endswith('नि'):
+                        form = form[:-2] + 'ानि'  # Fix आनि ending
+                    elif form.endswith('व'):
+                        form = form[:-1] + 'ाव'  # Fix आव ending
+                    elif form.endswith('म'):
+                        form = form[:-1] + 'ाम'  # Fix आम ending
+                        
+                conjugations[persons[person]][number] = form
     
     return conjugations

@@ -33,16 +33,102 @@ def padakarya_operations(component):
     """
     return component  # Placeholder for phonological operations like sandhi, vowel merging.
 
-def finalize_case_and_gender(component, case="nominative", gender="masculine"):
+def finalize_case_and_gender(component, case="nominative", gender="masculine", number="singular"):
     """
     Finalize the gender, number, and case ending for the generated compound.
+    
+    Args:
+        component (str): The base compound stem
+        case (str): Grammatical case (nominative, accusative, instrumental, etc.)
+        gender (str): Grammatical gender (masculine, feminine, neuter)
+        number (str): Grammatical number (singular, plural)
+    
+    Returns:
+        str: The compound with appropriate grammatical ending
     """
-    if case == "nominative":
-        if gender == "masculine":
-            return component + "ः"  # Masculine nominative case
-        elif gender == "feminine":
-            return component + "ा"  # Feminine nominative case
-    return component
+    # Comprehensive Sanskrit case and gender endings
+    endings = {
+        # Masculine endings
+        "masculine": {
+            "singular": {
+                "nominative": "ः",
+                "accusative": "म्",
+                "instrumental": "एण",
+                "dative": "आय",
+                "ablative": "आत्",
+                "genitive": "स्य",
+                "locative": "इ",
+                "vocative": "ः"
+            },
+            "plural": {
+                "nominative": "आः",
+                "accusative": "ान्",
+                "instrumental": "एः",
+                "dative": "एभ्यः",
+                "ablative": "एभ्यः",
+                "genitive": "आनाम्",
+                "locative": "एषु",
+                "vocative": "आः"
+            }
+        },
+        # Feminine endings
+        "feminine": {
+            "singular": {
+                "nominative": "आ",
+                "accusative": "आम्",
+                "instrumental": "आया",
+                "dative": "आयै",
+                "ablative": "आयाः",
+                "genitive": "आयाः",
+                "locative": "आयाम्",
+                "vocative": "ए"
+            },
+            "plural": {
+                "nominative": "आः",
+                "accusative": "आः",
+                "instrumental": "आभिः",
+                "dative": "आभ्यः",
+                "ablative": "आभ्यः",
+                "genitive": "आनाम्",
+                "locative": "आसु",
+                "vocative": "आः"
+            }
+        },
+        # Neuter endings
+        "neuter": {
+            "singular": {
+                "nominative": "म्",
+                "accusative": "म्",
+                "instrumental": "एण",
+                "dative": "आय",
+                "ablative": "आत्",
+                "genitive": "स्य",
+                "locative": "इ",
+                "vocative": "म्"
+            },
+            "plural": {
+                "nominative": "आनि",
+                "accusative": "आनि",
+                "instrumental": "एः",
+                "dative": "एभ्यः",
+                "ablative": "एभ्यः",
+                "genitive": "आनाम्",
+                "locative": "एषु",
+                "vocative": "आनि"
+            }
+        }
+    }
+    
+    # Validate inputs
+    if gender not in endings:
+        raise ValueError(f"Unsupported gender: {gender}")
+    if number not in endings[gender]:
+        raise ValueError(f"Unsupported number: {number}")
+    if case not in endings[gender][number]:
+        raise ValueError(f"Unsupported case: {case}")
+    
+    # Return the component with the appropriate ending
+    return component + endings[gender][number][case]
 
 # Main function to generate the compound
 def generate_sanskrit_compound(paraphrase):
@@ -63,6 +149,6 @@ def generate_sanskrit_compound(paraphrase):
     samasa_with_padakarya = padakarya_operations(samasa_with_upasarjana)
 
     # Step 6: Finalize the case and gender
-    final_compound = finalize_case_and_gender(samasa_with_padakarya)
+    final_compound = finalize_case_and_gender(samasa_with_padakarya, paraphrase.get("case", "nominative"), paraphrase.get("gender", "masculine"), paraphrase.get("number", "singular"))
 
     return final_compound

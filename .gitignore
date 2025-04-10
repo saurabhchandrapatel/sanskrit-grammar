@@ -107,3 +107,6 @@ __pypackages__/
 
 # pyre type checker
 .pyre/
+
+sanskrit_hindi_dict.db
+test_sanskrit_hindi_dict.db

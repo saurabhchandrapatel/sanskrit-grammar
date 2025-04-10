@@ -1,6 +1,5 @@
-#############
 Stem Generator
-#############
+============
 
 Overview
 --------
@@ -21,11 +20,11 @@ Features
    - Gender-specific forms
    - Number variations
 
-Usage Examples
-------------
+Examples
+--------
 
-Basic Compound Generation
-^^^^^^^^^^^^^^^^^^^^^^^^
+Basic Usage
+~~~~~~~~~~
 
 .. code-block:: python
 
@@ -41,8 +40,8 @@ Basic Compound Generation
     result = generate_sanskrit_compound(paraphrase)
     print(result)
 
-Advanced Compound Generation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Advanced Usage
+~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -56,8 +55,8 @@ Advanced Compound Generation
     result = generate_sanskrit_compound(paraphrase)
     print(result)
 
-Component Operations
-^^^^^^^^^^^^^^^^^
+Operations
+~~~~~~~~~
 
 .. code-block:: python
 

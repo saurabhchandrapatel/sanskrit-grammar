@@ -1,4 +1,3 @@
-
 from sanskrit_grammar import generate_word_with_upasarga_and_pratyaya
 
 # Example Usage
@@ -36,14 +35,14 @@ print(reaction)
 
 from sanskrit_grammar import generate_sanskrit_word
 
-# ✅ Example Usage
+# Example Usage
 print(generate_sanskrit_word("गच्छ", "लट्", "प्रथम", "एकवचन", "परस्मैपद"))  # गच्छति
 print(generate_sanskrit_word("पठ", "लङ्", "मध्यम", "बहुवचन", "परस्मैपद"))  # पठत
 print(generate_sanskrit_word("गम्", "लृट्", "उत्तम", "एकवचन", "आत्मनेपद"))  # गच्छे
 
 from sanskrit_grammar import conjugate_verb_all_lakaras
 
-# ✅ Example Usage
+# Example Usage
 root = "गच्छ"  # √गम् root verb
 pada_type = "परस्मैपद"  # Active voice
 
@@ -56,7 +55,7 @@ for lakara, conjugation in full_conjugations.items():
 
 from sanskrit_grammar import conjugate_verb
 
-# ✅ Example Usage
+# Example Usage
 root = "गच्छ"  # √गम् root verb
 tense = "लट्"  # Present tense
 pada_type = "परस्मैपद"  # Active voice
@@ -79,7 +78,7 @@ from sanskrit_grammar import detect_tense
 """
 
 
-# ✅ Example Test Cases
+# Example Test Cases
 words = ["गच्छति", "गच्छते", "अगच्छत्", "अगच्छन्ते", "गमिष्यति", "गमिष्यते",
          "गच्छतु", "गच्छताम्", "गच्छेत्", "गच्छेते", "भूयात्", "भूयाथ", 
          "अगच्छम्", "अगच्छे", "लभते", "लभति", "निन्दति", "निन्दते", "याचते"]
@@ -87,7 +86,7 @@ words = ["गच्छति", "गच्छते", "अगच्छत्", "�
 for word in words:
     print(detect_tense_and_pada(word))
 
-# ✅ Example Test Cases
+# Example Test Cases
 words = ["पठति", "अगच्छत्", "गमिष्यति", "अकरोत्", "करिष्यामि", "गच्छतु", "पठेत्", "भूयात्", "अगच्छम्"]
 
 for word in words:
@@ -96,11 +95,11 @@ for word in words:
 
 from sanskrit_grammar import conjugate_dhatu
 
-# ✅ Example with धातु "पठ्" (read/study)
+# Example with धातु "पठ्" (read/study)
 dhatu = "पठ"  # Root verb
 conjugated_forms = conjugate_dhatu(dhatu)
 
-# ✅ Display Results
+# Display Results
 for person, forms in conjugated_forms.items():
     print(f"{person}: {forms}")
 
@@ -108,22 +107,22 @@ from sanskrit_grammar import apply_sandhi
 from sanskrit_grammar import sandhi_viched
 
 
-# ✅ **Examples**
-#print("🔹 Pratyahara Example:")
+# Examples
+#print(" Pratyahara Example:")
 #print(get_pratyahara("अ", "ण्"))  # अ इ उ
 
-print("\n🔹 Sandhi Examples:")
+print("\n Sandhi Examples:")
 #print(apply_sandhi("राम", "इति"))  # रामेति
 print(apply_sandhi("गुरु", "उपदेशः"))  # गुरूपदेशः
 
-print("\n🔹 Sandhi Viched Examples:")
+print("\n Sandhi Viched Examples:")
 #print(sandhi_viched("रामेति"))  # ('राम', 'इ')
 print(sandhi_viched("गुरूपदेशः"))  # ('गुरु', 'उ')
 
 
 
 
-from sanskrit_grammar import PaniniSutras
+from sanskrit_grammar.ashtadhyayi_simulator import PaniniSutras
 
 
 """
@@ -156,20 +155,20 @@ print(f"After applying declension: {new_word}")
 
 
 
-from sanskrit_grammar import analyze_sanskrit_word
+from sanskrit_grammar.morphological_analyzer import analyze_sanskrit_word
 
 """
-📖 Kr̥t Pratyayas (Primary suffixes) → Noun/Adjective formation
+ Kr̥t Pratyayas (Primary suffixes) → Noun/Adjective formation
 
-📝 Taddhita Pratyayas (Secondary suffixes) → Derived words from nouns
+ Taddhita Pratyayas (Secondary suffixes) → Derived words from nouns
 
-🤲 Sarvanama Pratyayas (Pronouns) → Used in pronoun declension
+ Sarvanama Pratyayas (Pronouns) → Used in pronoun declension
 
-🔤 Vibhakti Pratyayas (Case suffixes) → Noun inflection
+ Vibhakti Pratyayas (Case suffixes) → Noun inflection
 
-🔗 Sandhi Pratyayas (Joining suffixes) → Used in compound formation
+ Sandhi Pratyayas (Joining suffixes) → Used in compound formation
 
-⚡ Dhatu Pratyayas (Verb inflections) → Used in tense/mood conjugation
+ Dhatu Pratyayas (Verb inflections) → Used in tense/mood conjugation
 """
 # Example Usage
 sanskrit_word = "प्रगच्छति"
@@ -179,7 +178,7 @@ analysis_result = analyze_sanskrit_word(sanskrit_word)
 print("Sanskrit Morphological Analysis:")
 print(analysis_result)
 
-from sanskrit_grammar import identify_pratyaya
+from sanskrit_grammar.morphological_analyzer import identify_pratyaya
 
 # Test Cases
 print(identify_pratyaya("गमनीय"))  # Expected: "नीय"
@@ -188,8 +187,8 @@ print(identify_pratyaya("पुरुषत्व"))  # Expected: "त्व"
 
 
 
-from sanskrit_grammar import segment_nn_expression
-from sanskrit_grammar import parse_nn_expression
+from sanskrit_grammar.NNExpression import segment_nn_expression
+from sanskrit_grammar.NNExpression import parse_nn_expression
 
 
 # Example usage
@@ -214,7 +213,7 @@ result2 = sandhi_handler(word3, word4)
 print(f"Sandhi of {word3} + {word4}: {result2}")
 
 
-from sanskrit_grammar import add_word, initialize_database ,translate_sentence,dependency_resolution
+from sanskrit_grammar.sanskrit_hindi_accessor import add_word, initialize_database ,translate_sentence,dependency_resolution
  
 initialize_database()
 
@@ -226,21 +225,19 @@ add_word("मित्रम्", "मित्र")
 
 # Sample Sanskrit sentence analysis
 sentence = "रामः गच्छति फलम्"
-print(f"🔍 संस्कृत वाक्य: {sentence}")
+print(f" संस्कृत वाक्य: {sentence}")
 
 # Word-by-word translation
-print(f"📖 हिंदी अनुवाद: {translate_sentence(sentence)}")
+print(f" हिंदी अनुवाद: {translate_sentence(sentence)}")
 
 # Analyzing words and dependencies
 words = sentence.split()
 analysis_result = dependency_resolution(words)
 for word, role in analysis_result.items():
-    print(f"🔹 {word} → {role}")
+    print(f" {word} → {role}")
 
 
-
-
-from sanskrit_grammar import  generate_sanskrit_compound
+from sanskrit_grammar.stem_generator import  generate_sanskrit_compound
 
 # Example usage
 
@@ -252,3 +249,109 @@ sample_paraphrase = {
 }
 compound = generate_sanskrit_compound(sample_paraphrase)
 print("Generated Sanskrit Compound:", compound)
+
+
+# Test noun declension
+from sanskrit_grammar.morphology import generate_noun_forms
+
+print("\n=== Sanskrit Morphology Examples ===")
+
+# Test noun declension
+print("\n1. Noun Declension Examples:")
+
+# Test a-ending masculine noun (अकारान्त पुंल्लिङ्ग)
+print("\nराम (Masculine):")
+rama_forms = generate_noun_forms("राम", "m")
+for case, numbers in rama_forms.items():
+    print(f"\n{case}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test ā-ending feminine noun (आकारान्त स्त्रीलिङ्ग)
+print("\nलता (Feminine):")
+lata_forms = generate_noun_forms("लत", "f")
+for case, numbers in lata_forms.items():
+    print(f"\n{case}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test a-ending neuter noun (अकारान्त नपुंसकलिङ्ग)
+print("\nज्ञान (Neuter):")
+jnana_forms = generate_noun_forms("ज्ञान", "n")
+for case, numbers in jnana_forms.items():
+    print(f"\n{case}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test verb conjugation
+from sanskrit_grammar.morphology import generate_verb_forms
+
+print("\n2. Verb Conjugation Examples:")
+
+# Test root with vowel ending
+print("\nभू (Present Tense, परस्मैपद):")
+bhu_forms = generate_verb_forms("भू", "p", "lat")
+for person, numbers in bhu_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test root with consonant ending
+print("\nपठ् (Present Tense, परस्मैपद):")
+path_forms = generate_verb_forms("पठ", "p", "lat")
+for person, numbers in path_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test ātmanepada verb
+print("\nसेव् (Present Tense, आत्मनेपद):")
+sev_forms = generate_verb_forms("सेव", "a", "lat")
+for person, numbers in sev_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test imperative mood
+print("\nनी (Imperative, परस्मैपद):")
+ni_forms = generate_verb_forms("नी", "p", "lot")
+for person, numbers in ni_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test verb conjugation system
+print("\n2. Verb Conjugation Examples:")
+from sanskrit_grammar.morphology import generate_verb_forms
+
+# Test root with vowel ending
+print("\nभू (Present Tense, परस्मैपद):")
+bhu_forms = generate_verb_forms("भू", "p", "lat")
+for person, numbers in bhu_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test root with consonant ending
+print("\nपठ् (Present Tense, परस्मैपद):")
+path_forms = generate_verb_forms("पठ", "p", "lat")
+for person, numbers in path_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test ātmanepada verb
+print("\nसेव् (Present Tense, आत्मनेपद):")
+sev_forms = generate_verb_forms("सेव", "a", "lat")
+for person, numbers in sev_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")
+
+# Test imperative mood
+print("\nनी (Imperative, परस्मैपद):")
+ni_forms = generate_verb_forms("नी", "p", "lot")
+for person, numbers in ni_forms.items():
+    print(f"\n{person}:")
+    for number, form in numbers.items():
+        print(f"  {number}: {form}")

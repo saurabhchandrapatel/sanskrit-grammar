@@ -86,26 +86,3 @@ def translate_sentence(sentence):
             hindi_translation.append(f"{sw} ({get_hindi_meaning(sw)})")
     
     return " | ".join(hindi_translation)
-
-# --- Example Usage ---
-if __name__ == "__main__":
-    initialize_database()
-    
-    # Adding sample words to dictionary
-    add_word("रामः", "राम (एक व्यक्ति)")
-    add_word("गच्छति", "जाता है")
-    add_word("फलम्", "फल")
-    add_word("मित्रम्", "मित्र")
-
-    # Sample Sanskrit sentence analysis
-    sentence = "रामः गच्छति फलम्"
-    print(f"🔍 संस्कृत वाक्य: {sentence}")
-    
-    # Word-by-word translation
-    print(f"📖 हिंदी अनुवाद: {translate_sentence(sentence)}")
-    
-    # Analyzing words and dependencies
-    words = sentence.split()
-    analysis_result = dependency_resolution(words)
-    for word, role in analysis_result.items():
-        print(f"🔹 {word} → {role}")

@@ -54,14 +54,3 @@ def sandhi_handler(word1, word2):
         return apply_consonant_sandhi(word1, word2)
     else:
         return word1 + word2
-
-# Test cases for Sandhi
-word1 = 'राम'
-word2 = 'इति'
-result = sandhi_handler(word1, word2)
-print(f"Sandhi of {word1} + {word2}: {result}")
-
-word3 = 'गच्छ'
-word4 = 'सि'
-result2 = sandhi_handler(word3, word4)
-print(f"Sandhi of {word3} + {word4}: {result2}")

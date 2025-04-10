@@ -111,31 +111,3 @@ def analyze_sanskrit_word(word):
         "additional_suffix": additional_suffix
     }
 
-
-"""
-📖 Kr̥t Pratyayas (Primary suffixes) → Noun/Adjective formation
-
-📝 Taddhita Pratyayas (Secondary suffixes) → Derived words from nouns
-
-🤲 Sarvanama Pratyayas (Pronouns) → Used in pronoun declension
-
-🔤 Vibhakti Pratyayas (Case suffixes) → Noun inflection
-
-🔗 Sandhi Pratyayas (Joining suffixes) → Used in compound formation
-
-⚡ Dhatu Pratyayas (Verb inflections) → Used in tense/mood conjugation
-"""
-# Example Usage
-sanskrit_word = "प्रगच्छति"
-sanskrit_word = "saurabh"
-analysis_result = analyze_sanskrit_word(sanskrit_word)
-
-print("Sanskrit Morphological Analysis:")
-print(analysis_result)
-
-
-# Test Cases
-print(identify_pratyaya("गमनीय"))  # Expected: "नीय"
-print(identify_pratyaya("वक्तव्य"))  # Expected: "व्य"
-print(identify_pratyaya("पुरुषत्व"))  # Expected: "त्व"
-

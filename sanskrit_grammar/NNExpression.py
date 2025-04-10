@@ -61,9 +61,3 @@ def render_graph(parsed_expression):
     pos = nx.spring_layout(G)
     nx.draw(G, pos, with_labels=True, node_size=3000, node_color="skyblue", font_size=12, font_weight="bold", arrows=True)
     plt.show()
-
-# Example usage
-expression = "धर्मकर्मसिद्धान्ते किञ्च न"
-segmented_expression, segments_found = segment_nn_expression(expression)
-parsed_expression = parse_nn_expression(segmented_expression)
-render_graph(parsed_expression)

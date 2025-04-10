@@ -66,14 +66,3 @@ def generate_sanskrit_compound(paraphrase):
     final_compound = finalize_case_and_gender(samasa_with_padakarya)
 
     return final_compound
-
-# Example usage
-
-# Define some sample data for the generator
-# Analytical paraphrase format
-sample_paraphrase = {
-    "first_component": "राजन्",  # king
-    "second_component": "पत्नी",  # queen
-}
-compound = generate_sanskrit_compound(sample_paraphrase)
-print("Generated Sanskrit Compound:", compound)

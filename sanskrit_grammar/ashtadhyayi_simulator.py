@@ -53,21 +53,3 @@ class PaniniSutras:
             return word + "ं"
         return word
 
-
-# Example usage
-panini = PaniniSutras()
-
-# Applying sutra 'nakara_svara'
-word = "राजन"  # Example word
-new_word = panini.apply_sutra("nakara_svara", word)
-print(f"After applying nakara_svara: {new_word}")
-
-# Applying sutra 'vowel_to_vowel_rule'
-word = "राज"  # Example word
-new_word = panini.apply_sutra("vowel_to_vowel_rule", word)
-print(f"After applying vowel_to_vowel_rule: {new_word}")
-
-# Applying declension transformation
-word = "राज"  # Example word
-new_word = panini.apply_declension(word)
-print(f"After applying declension: {new_word}")

@@ -1,14 +1,16 @@
 from setuptools import setup, find_packages
 
-# Read requirements from requirements.txt
-with open("requirements.txt") as f:
-    requirements = f.read().splitlines()
-
+requirements = [
+    "matplotlib",
+    "networkx",
+    "pytesseract",
+    "Pillow"
+]
 setup(
     name='sanskrit-grammar',
-    version='0.2.0',
+    version='0.3.0',
     packages=find_packages(),
-    install_requires=[],  # list any dependencies here
+    install_requires=requirements,  # <- use the requirements here
     author='Saurabh Chandra Patel',
     author_email='vsaurabhaec@gmail.com',
     description='Python module provides functions to handle and manipulate various aspects of Sanskrit grammar, including word generation, prefixes etc',
